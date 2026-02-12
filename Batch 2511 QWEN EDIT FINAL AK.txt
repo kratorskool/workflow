@@ -1,0 +1,101 @@
+==============================
+QWEN IMAGE EDIT 2511 SETTINGS
+==============================
+
+[ SYSTEM ]
+GPU            : RTX 4070
+OS             : Windows 11
+Mode           : ComfyUI Portable
+Precision      : BF16 / FP8 compatible
+
+------------------------------
+[ MODELS ]
+------------------------------
+
+Diffusion Model:
+- qwen_image_edit_2511_bf16.safetensors
+- weight_dtype: default
+
+LoRA:
+- Qwen-Image-Edit-2511-Lightning-4steps
+- strength_model: 1.0
+  (use 0.8 if edit is too strong)
+
+CLIP:
+- qwen_2.5_vl_7b_fp8_scaled.safetensors
+- type: qwen_image
+- device: cuda (or default)
+
+VAE:
+- qwen_image_vae.safetensors
+
+------------------------------
+[ SAMPLING SETTINGS ]
+------------------------------
+
+KSampler:
+- Steps        : 4
+- CFG          : 1.0
+- Sampler      : euler
+- Scheduler    : simple
+- Denoise      : 1.0
+- Seed         : random
+
+CFGNorm:
+- strength     : 1
+
+ModelSamplingAuraFlow:
+- shift        : 3
+
+------------------------------
+[ IMAGE SIZE ]
+------------------------------
+
+ImageScaleToTotalPixels:
+- Upscale method  : lanczos
+- Megapixels      : 1.0
+- Resolution step : 1
+
+(Target resolution ≈ 1024 × 1024)
+
+------------------------------
+[ PROMPT STYLE ]
+------------------------------
+
+Positive Prompt (example):
+- make the person wear gym clothes
+- keep face same
+- realistic lighting
+- street background
+- natural body proportions
+
+Negative Prompt:
+- blurry
+- bad anatomy
+- distorted face
+- extra limbs
+- low quality
+
+------------------------------
+[ IMPORTANT RULES ]
+------------------------------
+
+- DO NOT increase steps (Lightning LoRA = 4 steps only)
+- DO NOT increase CFG above 1.0
+- DO NOT use SDXL / SD1.5 LoRAs
+- Always scale images to ~1024px
+- Use Qwen Image CLIP only (not Qwen3 / VL CLIP)
+
+------------------------------
+[ QUICK FIXES ]
+------------------------------
+
+Edit too weak  → LoRA = 1.0
+Edit too strong → LoRA = 0.8
+Face changes   → add "keep face same"
+Artifacts      → keep CFG at 1.0
+Color issues   → add "natural lighting"
+
+==============================
+END OF SETTINGS
+==============================
